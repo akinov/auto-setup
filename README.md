@@ -10,19 +10,19 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/akinov/auto-setup/master/d
 ## Installation
 To get started please run:
 ```
-~/mac-auto-setup/setup.sh
+~/auto-setup/setup.sh
 ```
 Install GUI apps:
 ```
-~/mac-auto-setup/app.sh
+~/auto-setup/app.sh
 ```
 Install App Store apps:
 ```
-~/mac-auto-setup/appstore.sh
+~/auto-setup/appstore.sh
 ```
 Update apps and settings:
 ```
-~/mac-auto-setup/update.sh
+~/auto-setup/update.sh
 ```
 
 ## Apps config file
