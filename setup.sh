@@ -1,12 +1,4 @@
 #!/bin/bash
-cat << EOS
-
- AkkeyLab
-
- The elapsed time does not matter.
- Because speed is important.
-
-EOS
 
 function command_exists {
   command -v "$1" > /dev/null;
@@ -50,7 +42,7 @@ read -sp "Your Password: " pass;
 if ! command_exists mas ; then
   echo " ---- Mac App Store apps -----"
   brew install mas
-  mas install 497799835  # Xcode (8.2.1)
+  mas install 497799835  # Xcode
   echo " ------------ END ------------"
 fi
 
@@ -114,13 +106,15 @@ echo " ------------ END ------------"
 #
 # Install Node.js env
 #
-if ! command_exists nodebrew ; then
+if ! command_exists nodenv ; then
   echo " ---------- Node.js ----------"
-  curl -L git.io/nodebrew | perl - setup
-  nodebrew ls-remote
-  nodebrew install-binary latest
-  nodebrew ls
-  nodebrew use latest
+  brew install anyenv
+  anyenv init
+  anyenv install nodenv
+  node_latest=$(nodenv install -l | grep -v '[a-z]' | tail -1 | sed 's/ //g')
+  nodenv install $node_latest
+  nodenv global $node_latest
+  nodenv rehash
   node -v
   npm -v
   echo " ------------ END ------------"
@@ -132,25 +126,6 @@ fi
 if ! command_exists yarn ; then
   echo " ----------- Yarn ------------"
   brew install yarn
-  echo " ------------ END ------------"
-fi
-
-#
-# TeX settings
-#
-if ! command_exists tex ; then
-  echo " ------------ TeX ------------"
-  brew cask install mactex
-  # Tex Live Utility > preference > path -> /Library/TeX/texbin
-  version=$(tex -version | grep -oE '2[0-9]{3}' | head -1)
-  echo $pass | sudo -S /usr/local/texlive/$version/bin/x86_64-darwin/tlmgr path add
-  echo $pass | sudo -S tlmgr update --self --all
-  # JPN Lang settings
-  cd /usr/local/texlive/$version/texmf-dist/scripts/cjk-gs-integrate
-  echo $pass | sudo -S perl cjk-gs-integrate.pl --link-texmf --force
-  echo $pass | sudo -S mktexlsr
-  echo $pass | sudo -S kanji-config-updmap-sys hiragino-elcapitan-pron
-  # Select ==> TeXShop > Preferences > Source > pTeX (ptex2pdf)
   echo " ------------ END ------------"
 fi
 
