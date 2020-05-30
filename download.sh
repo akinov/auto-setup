@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function command_exists {
+command_exists () {
   command -v "$1" > /dev/null;
 }
 
