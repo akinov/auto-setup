@@ -9,7 +9,8 @@ command_exists () {
 #
 if ! command_exists brew ; then
   echo " --------- Homebrew ----------"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+  echo "eval $($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   brew update
   brew upgrade --all --cleanup
   brew -v
@@ -30,5 +31,5 @@ fi
 # mac-auto-setup.git
 #
 echo " ---- mac-auto-setup.git -----"
-git clone https://github.com/AkkeyLab/mac-auto-setup.git
+git clone https://github.com/akinov/auto-setup.git
 echo " ------------ END ------------"

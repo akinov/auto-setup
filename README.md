@@ -1,8 +1,5 @@
 # mac-auto-setup
-Auto setup system for macOS.
-
-## macOS version
-macOS Catalina 10.15.4
+Auto setup system for Ubuntu.
 
 ## Downloads
 To get started please run:
